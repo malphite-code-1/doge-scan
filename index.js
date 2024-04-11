@@ -71,16 +71,12 @@ if (cluster.isMaster) {
     });
 
     let boxes = [];
-    const boxHeight = 10;
-    const distanceBetweenBoxes = 5;
-
     let infoBox = blessed.box({
         top: '0%',
         left: 0,
         width: '100%',
         height: '25%',
-        content: `//Created by: Malphite
-//Licence : MIT License`,
+        content: `Created by: Malphite`,
         border: {
             type: 'line'
         },
@@ -91,33 +87,34 @@ if (cluster.isMaster) {
             }
         }
     });
-
-    for (let i = 0; i < numCPUs; i++) {
-        let box = blessed.text({
-            top: `${30 + (boxHeight * i + distanceBetweenBoxes * i)}%`,
-            left: 0,
-            width: '100%',
-            height: boxHeight,
-            content: `Worker ${i + 1} Keys generated: 0 Speed: 0 keys/min`,
-            style: {
-                fg: 'green'
-            }
-        });
-        screen.append(infoBox);
-        screen.append(box);
-        boxes.push(box);
-    }
-
-
+    let box = blessed.text({
+        top: `30%`,
+        left: 0,
+        width: '100%',
+        height: '20%',
+        content: `[${numCPUs} Workers]: Keys generated: 0 Speed: 0 keys/min`,
+        style: {
+            fg: 'green'
+        }
+    });
+    screen.append(infoBox);
+    screen.append(box);
     screen.render();
 
     cluster.on('message', (worker, message) => {
         if (message.counts) {
+            let counts = 0;
+            let speed = 0;
+
             for (let workerId in message.counts) {
                 let elapsedTimeInMinutes = (Date.now() - startTime) / 60000;
                 let speedPerMinute = message.counts[workerId] / elapsedTimeInMinutes;
-                boxes[workerId - 1].setContent(`Worker ${workerId} Keys generated: ${message.counts[workerId]} Speed: ${speedPerMinute.toFixed(2)} keys/min`);
+                counts += message.counts[workerId];
+                speed += speedPerMinute;
             }
+
+            box.setContent(`[${numCPUs} Workers]: Keys generated: ${counts} -- Speed: ${Math.round(speed)} keys/min`);
+
             screen.render();
         }
 
