@@ -9,6 +9,7 @@
   "author": "CorvusCodex",
   "license": "MIT",
   "dependencies": {
+    "axios": "^1.6.8",
     "blessed": "^0.1.81",
     "coininfo": "^5.2.1",
     "coinkey": "^3.0.0",
