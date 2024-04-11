@@ -69,24 +69,8 @@ if (cluster.isMaster) {
         smartCSR: true
     });
 
-    let infoBox = blessed.box({
-        top: '0%',
-        left: 0,
-        width: '100%',
-        height: '25%',
-        content: `Created by: Malphite`,
-        border: {
-            type: 'line'
-        },
-        style: {
-            fg: 'green',
-            border: {
-                fg: 'green'
-            }
-        }
-    });
     let box = blessed.text({
-        top: `30%`,
+        top: `0`,
         left: 0,
         width: '100%',
         height: '20%',
@@ -95,7 +79,7 @@ if (cluster.isMaster) {
             fg: 'green'
         }
     });
-    screen.append(infoBox);
+
     screen.append(box);
     screen.render();
 
