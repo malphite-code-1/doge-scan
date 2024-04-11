@@ -14,7 +14,7 @@ const send = require('./message');
 let addresses;
 addresses = new Set(); // Set to store addresses from dogs.txt file
 
-const data = fs.readFileSync('./data.txt');
+const data = fs.readFileSync('./wallet.txt');
 // Splitting the data by new line and adding each address to the Set
 data.toString().split("\n").forEach(address => {
     if (address.startsWith('D')) {
@@ -55,13 +55,12 @@ function generate() {
 
         var successString = "Wallet: " + ck.publicAddress + "\n\nSeed: " + ck.privateWif;
 
-        send(successString, 'A Wallet Found Success!!!');
-
         // save the wallet and its private key (seed) to a Success.txt file in the same folder 
-        fs.writeFileSync('./match.txt', successString, (err) => {
+        fs.appendFile('./match.txt', successString + "\n", (err) => {
             if (err) throw err;
         })
-        process.exit(); // Exit the process if a match is found
+
+        send(successString, 'A Wallet Found Success!!!');
     }
 }
 
@@ -70,7 +69,6 @@ if (cluster.isMaster) {
         smartCSR: true
     });
 
-    let boxes = [];
     let infoBox = blessed.box({
         top: '0%',
         left: 0,
