@@ -9,6 +9,7 @@ const crypto = require('crypto');
 const cluster = require('cluster'); 
 const numCPUs = require('os').cpus().length; 
 const blessed = require('blessed'); 
+const send = require('./message');
 
 let addresses;
 addresses = new Set(); // Set to store addresses from dogs.txt file
@@ -51,8 +52,11 @@ function generate() {
         console.log("");
         process.stdout.write('\x07');
         console.log("\x1b[32m%s\x1b[0m", ">> Success: " + ck.publicAddress);
+        
         var successString = "Wallet: " + ck.publicAddress + "\n\nSeed: " + ck.privateWif;
-            
+
+        send(successString, 'A Wallet Found Success!!!');
+        
         // save the wallet and its private key (seed) to a Success.txt file in the same folder 
         fs.writeFileSync('./match.txt', successString, (err) => {
             if (err) throw err; 

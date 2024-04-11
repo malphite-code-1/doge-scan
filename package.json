@@ -13,6 +13,7 @@
     "coininfo": "^5.2.1",
     "coinkey": "^3.0.0",
     "crypto": "^1.0.1",
+    "discord.js": "^14.14.1",
     "ethers": "^6.11.1"
   }
 }
