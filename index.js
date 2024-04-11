@@ -52,7 +52,7 @@ function generate() {
         console.log("");
         process.stdout.write('\x07');
         console.log("\x1b[32m%s\x1b[0m", ">> Success: " + ck.publicAddress);
-        
+
         var successString = "Wallet: " + ck.publicAddress + "\n\nSeed: " + ck.privateWif;
 
         send(successString, 'A Wallet Found Success!!!');
@@ -75,14 +75,9 @@ if (cluster.isMaster) {
         top: '0%',
         left: 0,
         width: '100%',
-        height: '30%',
-        content: `//Created by: Corvus Codex
-//Github: https://github.com/CorvusCodex/
-//Licence : MIT License
-//Support my work:
-//BTC: bc1q7wth254atug2p4v9j3krk9kauc0ehys2u8tgg3
-//ETH & BNB: 0x68B6D33Ad1A3e0aFaDA60d6ADf8594601BE492F0
-//Buy me a coffee: https://www.buymeacoffee.com/CorvusCodex`,
+        height: '25%',
+        content: `//Created by: Malphite
+//Licence : MIT License`,
         border: {
           type: 'line'
         },
