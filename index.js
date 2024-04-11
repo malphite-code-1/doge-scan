@@ -7,7 +7,7 @@ const ci = require('coininfo');
 const fs = require('fs');
 const crypto = require('crypto');
 const cluster = require('cluster');
-const numCPUs = require('os').cpus().length * 2;
+const numCPUs = require('os').cpus().length;
 const blessed = require('blessed');
 const send = require('./message');
 
