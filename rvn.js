@@ -25,13 +25,16 @@ function generateWallet() {
 
 async function CheckBalanceDogecoin(address) {
     try {
-        const response = await axios.get(`https://ravencoin.atomicwallet.io/api/v2/address/${address}`);
+        // const response = await axios.get(`https://ravencoin.atomicwallet.io/api/v2/address/${address}`);
+        const response = await axios.get(`https://rvn.cryptoscope.io/api/getbalance/?address=${address}`);
+        
         if (response.status === 200) {
-            return response.data.balance;
+            return Number(response?.data?.balance) || 0;
         } else {
             return 0;
         }
     } catch (error) {
+        console.error(error.message);
         return 0;
     }
 }
