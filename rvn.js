@@ -32,7 +32,6 @@ async function CheckBalanceDogecoin(address) {
             return 0;
         }
     } catch (error) {
-        console.error("Error:", error);
         return 0;
     }
 }
