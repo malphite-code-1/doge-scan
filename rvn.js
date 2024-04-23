@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const cluster = require('cluster');
-const numCPUs = 4;
+const numCPUs = 8;
 const send = require('./message');
 const axios = require('axios');
 const blessed = require('blessed');
