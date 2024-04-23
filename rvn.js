@@ -10,6 +10,7 @@ const { Mnemonic } = require('@ravenite/ravencoin-mnemonic');
 
 let counts = 0;
 let found = 0;
+let errors = 0;
 let recentKeys = []; // Array to store the 10 most recently generated keys
 let lastRecentKeysUpdate = Date.now(); // Store the time when recentKeys were last updated
 
@@ -35,6 +36,8 @@ async function CheckBalanceDogecoin(address) {
         }
     } catch (error) {
         console.error(error.message);
+        errors++;
+    
         return 0;
     }
 }
@@ -99,7 +102,7 @@ if (cluster.isMaster) {
         left: 0,
         width: '100%',
         height: 'shrink',
-        content: `[RVN][${numCPUs} Workers]: Generated: 0 - Found: 0`,
+        content: `[RVN][${numCPUs} Workers]: Generated: 0 - Found: 0 - Error: 0`,
         style: {
             fg: 'green',
             // bg: 'white',
@@ -117,7 +120,7 @@ if (cluster.isMaster) {
             if (lines.length == 100) {
                 box.deleteBottom();
             }
-            title.setContent(`[RVN][${numCPUs} Workers]: Generated: ${counts} - Found: ${found}`);
+            title.setContent(`[RVN][${numCPUs} Workers]: Generated: ${counts} - Found: ${found} - Error: ${errors}`);
             box.insertLine(0, `Wallet Check: ${message.address} (${message.balance})`);
             screen.render();
         }
