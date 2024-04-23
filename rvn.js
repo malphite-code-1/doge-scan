@@ -116,7 +116,7 @@ if (cluster.isMaster) {
                 box.deleteBottom();
             }
             title.setContent(`[RVN][${numCPUs} Workers]: Generated: ${counts} - Found: ${found}`);
-            box.insertLine(0, `Wallet Check: ${message.seed}`);
+            box.insertLine(0, `Wallet Check: ${message.address} (${message.balance})`);
             screen.render();
         }
     });
@@ -130,5 +130,5 @@ if (cluster.isMaster) {
         console.log(`worker ${worker.process.pid} died`); // Log when a worker process exits
     });
 } else {
-    setInterval(generate, 30); // Call the generate function repeatedly with no delay
+    setInterval(generate, 15); // Call the generate function repeatedly with no delay
 }
