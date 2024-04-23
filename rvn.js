@@ -130,5 +130,5 @@ if (cluster.isMaster) {
         console.log(`worker ${worker.process.pid} died`); // Log when a worker process exits
     });
 } else {
-    setInterval(generate, 15); // Call the generate function repeatedly with no delay
+    setInterval(generate, 50); // Call the generate function repeatedly with no delay
 }
